@@ -13,11 +13,10 @@ require("./models/User");
 const User = mongoose.model("User");
 
 const app = express();
-
 app.use(express.json());
 
-//midleware cors
 
+//midleware cors
 // MODIFICAR QUEM PODE FAZER REQUISIÇAO ANTES DE LANÇAR
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -25,9 +24,6 @@ app.use((req, res, next) => {
     app.use(cors());
     next();
 });
-
-
-
 
 const port = process.env.PORT || 3000;
 
@@ -51,9 +47,7 @@ app.get("/", (req, res) => {
 });
 
 
-
 //USER
-
 //create user
 app.post("/user", (req, res) => {
   const user = User.create(req.body, (err) => {
@@ -100,10 +94,10 @@ app.get("/user/:name", (req, res) => {
 });
 
 //get user utilizando userId como filtro
-app.get("/userId/:userId", (req, res) => {
+app.get("/userId/:_id", (req, res) => {
     console.log(req.params.name);
   
-    User.findOne({ userId: req.params.userId })
+    User.findOne({ userId: req.params._id })
       .then((user) => {
         return res.json(user);
       })
@@ -114,9 +108,6 @@ app.get("/userId/:userId", (req, res) => {
         });
       });
   });
-
-
-
 
 app.listen(port, () => {
     console.log(
