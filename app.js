@@ -95,11 +95,11 @@ app.get("/user/:name", (req, res) => {
 
 //get user utilizando userId como filtro
 app.get("/userId/:_id", (req, res) => {
-    console.log(req.params.name);
+    console.log(req.params._id);
   
-    User.findOne({ userId: req.params._id })
-      .then((user) => {
-        return res.json(user);
+    User.findOne({ _id: req.params._id })
+      .then((userId) => {
+        return res.json(userId);
       })
       .catch((err) => {
         return res.status(400).json({
