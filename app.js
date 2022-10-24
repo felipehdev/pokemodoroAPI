@@ -109,6 +109,22 @@ app.get("/userId/:_id", (req, res) => {
       });
   });
 
+  //UPDATE POKEMON
+  app.put("/updatePokemons/:_id", (req, res) => {
+    User.findOneAndUpdate( {_id: req.params._id}, {pokemons: req.body.pokemons}, {new: true} )
+  .then((updatePokemons)=> {
+    return res.json(updatePokemons);
+  })
+  .catch((err)=> {
+    return res.status(400).json({
+      error: true,
+      message: "Nao foi possivel fazer o update dos pokemons",
+
+  });
+});
+});
+
+
 app.listen(port, () => {
     console.log(
       `Listening on port ${port}, on localhost http://localhost:${port}`
